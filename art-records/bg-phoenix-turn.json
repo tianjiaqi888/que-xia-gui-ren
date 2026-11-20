@@ -1,0 +1,13 @@
+{
+  "key": "bg-phoenix-turn",
+  "file": "assets/bg-phoenix-turn.webp",
+  "original": "assets/bg-phoenix-turn-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/bg-phoenix-turn.txt",
+  "size": [
+    1671,
+    941
+  ],
+  "alpha": false,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

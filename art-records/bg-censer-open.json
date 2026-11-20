@@ -1,0 +1,13 @@
+{
+  "key": "bg-censer-open",
+  "file": "assets/bg-censer-open.webp",
+  "original": "assets/bg-censer-open-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/bg-censer-open.txt",
+  "size": [
+    1672,
+    941
+  ],
+  "alpha": false,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

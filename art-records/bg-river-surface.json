@@ -1,0 +1,13 @@
+{
+  "key": "bg-river-surface",
+  "file": "assets/bg-river-surface.webp",
+  "original": "assets/bg-river-surface-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/bg-river-surface.txt",
+  "size": [
+    1672,
+    941
+  ],
+  "alpha": false,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

@@ -1,0 +1,13 @@
+{
+  "key": "char-guide",
+  "file": "assets/char-guide.webp",
+  "original": "assets/char-guide-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/char-guide.txt",
+  "size": [
+    1024,
+    1536
+  ],
+  "alpha": true,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

@@ -1,0 +1,24 @@
+/* Independently moving landscape, window weather, carriage and eyelids. */
+#bus-view{position:absolute;inset:0;z-index:2;overflow:hidden;display:none;--sleep-progress:0;background:#384641}
+#stage[data-scene="bg-bus"] #bus-view{display:block}
+#stage[data-scene="bg-bus"] #bg-layer{visibility:hidden}
+#stage[data-scene="bg-bus"] #char-layer{pointer-events:none}
+#bus-carriage{position:absolute;inset:0;overflow:hidden;transform-origin:50% 50%;filter:blur(calc(var(--sleep-progress)*5px)) brightness(calc(1 - var(--sleep-progress)*.55));will-change:transform}
+#bus-landscape,#bus-frame{position:absolute;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+#bus-landscape{filter:saturate(.74) brightness(.78);transform:scale(1.13) translateX(3%);will-change:transform}
+#bus-frame{z-index:3;pointer-events:none;filter:saturate(.72) brightness(.75)}
+#bus-window-surface{position:absolute;inset:13% 10% 18%;z-index:2;overflow:hidden;touch-action:none;cursor:grab}
+#bus-window-surface:active{cursor:grabbing}
+#bus-fog,#bus-rain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#stage[data-scene="bg-bus"] #vignette{background:linear-gradient(0deg,#080e14a8,transparent 34%,transparent 70%,#0c141959),radial-gradient(ellipse at center,transparent 30%,#07101555)}
+.bus-eyelid{position:absolute;left:-5%;width:110%;height:calc(var(--sleep-progress)*53%);background:#030709;z-index:5;pointer-events:none;box-shadow:0 0 22px 15px #030709;will-change:height}
+.bus-eyelid.upper{top:-2%;border-radius:0 0 50% 50% / 0 0 10% 10%}
+.bus-eyelid.lower{bottom:-2%;border-radius:50% 50% 0 0 / 10% 10% 0 0}
+#bus-wipe-hint{position:absolute;left:50%;top:17%;transform:translateX(-50%);font:11px var(--serif);letter-spacing:2px;color:#edf0d7b8;text-shadow:0 1px 9px #000;padding:8px 15px;background:#18251f55;z-index:4;pointer-events:none;opacity:calc(1 - var(--sleep-progress))}
+#bus-rest{position:absolute;right:15%;top:53%;display:flex;flex-direction:column;align-items:center;gap:17px;padding:25px 33px;border:1px solid #d8bf8d66;background:#13211fe3;backdrop-filter:blur(7px);z-index:7;animation:item-offer .6s ease-out}
+#bus-rest[hidden]{display:none}#bus-rest>span{font:10px var(--serif);letter-spacing:5px;color:#b7b89c}#bus-rest small{font:11px var(--serif);color:#a8b4a3}
+#bus-sleep{font:20px var(--serif);letter-spacing:4px;background:none;border:0;color:#e5d4ad;padding:10px 12px;cursor:pointer}#bus-sleep i{font-size:16px;font-style:normal;margin-left:25px}#bus-sleep:hover{color:#fff3cf;text-shadow:0 0 12px #dfc18466}
+#bus-review{color:#e7dfc9;background:#14211f;border:1px solid #c4ac6c88;border-radius:2px;padding:38px 44px;width:min(600px,92vw);margin:auto;box-shadow:0 30px 130px #000b;text-align:center}
+#bus-review::backdrop{background:#03090bd9;backdrop-filter:blur(9px)}#bus-review h2{font:29px/1.7 var(--serif);letter-spacing:3px;margin:21px 0}#bus-review p{font:13px/2 var(--serif);color:#c5cfbc}#bus-review .review-note{font-size:11px;color:#899b8d;margin-top:17px}#bus-review .review-actions{flex-wrap:wrap}
+@media(max-width:760px){#bus-wipe-hint{top:21%;font-size:10px;white-space:nowrap;letter-spacing:1px}#bus-rest{right:9%;left:9%;top:48%;padding:20px}#bus-sleep{font-size:20px}#bus-window-surface{inset:13% 0 18%}#bus-review{padding:27px 22px}#bus-review h2{font-size:24px}#bus-frame{object-position:49% center}}
+@media(prefers-reduced-motion:reduce){#bus-carriage,#bus-landscape{will-change:auto}.bus-eyelid{box-shadow:none;border-radius:0}}

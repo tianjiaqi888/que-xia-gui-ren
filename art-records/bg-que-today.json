@@ -1,0 +1,13 @@
+{
+  "key": "bg-que-today",
+  "file": "assets/bg-que-today.webp",
+  "original": "assets/bg-que-today-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/bg-que-today.txt",
+  "size": [
+    1672,
+    941
+  ],
+  "alpha": false,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

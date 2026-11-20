@@ -1,0 +1,670 @@
+{
+  "description": "Imagined narrative illustrations, not documentary photos or exact archaeological reconstructions. Aliases intentionally reuse the same setting or minor role.",
+  "aliases": {
+    "bg-title": "bg-que-built",
+    "bg-shufang": "bg-censer",
+    "bg-proclaim": "bg-censer",
+    "bg-shuangque": "bg-que-built",
+    "bg-zhujian": "item-zhujian",
+    "char-servant": "char-shuli",
+    "fx-lunge": "stranger",
+    "fx-war": "bg-feast",
+    "fx-painting": "bg-yuewu",
+    "fx-que": "bg-que-built"
+  },
+  "procedural": [
+    "fx-blood",
+    "fx-eye",
+    "fx-ink",
+    "fx-white"
+  ],
+  "assets": [
+    {
+      "key": "bg-camp",
+      "file": "assets/bg-camp.webp",
+      "original": "assets/bg-camp-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-camp.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-censer-inside",
+      "file": "assets/bg-censer-inside.webp",
+      "original": "assets/bg-censer-inside-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-censer-inside.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-censer-open",
+      "file": "assets/bg-censer-open.webp",
+      "original": "assets/bg-censer-open-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-censer-open.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-censer",
+      "file": "assets/bg-censer.webp",
+      "original": "assets/bg-censer-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-censer.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-coffin-close",
+      "file": "assets/bg-coffin-close.webp",
+      "original": "assets/bg-coffin-close-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-coffin-close.txt",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-coffin",
+      "file": "assets/bg-coffin.webp",
+      "original": "assets/bg-coffin-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-coffin.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-fair-stage",
+      "file": "assets/bg-fair-stage.webp",
+      "original": "assets/bg-fair-stage-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-fair-stage.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-fair-walk",
+      "file": "assets/bg-fair-walk.webp",
+      "original": "assets/bg-fair-walk-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-fair-walk.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-fair",
+      "file": "assets/bg-fair.webp",
+      "original": "assets/bg-fair-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-fair.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-feast",
+      "file": "assets/bg-feast.webp",
+      "original": "assets/bg-feast-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-feast.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-fenghuan",
+      "file": "assets/bg-fenghuan.webp",
+      "original": "assets/bg-fenghuan-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-fenghuan.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-funeral",
+      "file": "assets/bg-funeral.webp",
+      "original": "assets/bg-funeral-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-funeral.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-phoenix-turn",
+      "file": "assets/bg-phoenix-turn.webp",
+      "original": "assets/bg-phoenix-turn-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-phoenix-turn.txt",
+      "size": [
+        1671,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-pottery-close",
+      "file": "assets/bg-pottery-close.webp",
+      "original": "assets/bg-pottery-close-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-pottery-close.txt",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-prison",
+      "file": "assets/bg-prison.webp",
+      "original": "assets/bg-prison-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-prison.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-que-built",
+      "file": "assets/bg-que-built.webp",
+      "original": "assets/bg-que-built-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-que-built.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-que-today",
+      "file": "assets/bg-que-today.webp",
+      "original": "assets/bg-que-today-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-que-today.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-river-sisters",
+      "file": "assets/bg-river-sisters.webp",
+      "original": "assets/bg-river-sisters-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-river-sisters.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-river-surface",
+      "file": "assets/bg-river-surface.webp",
+      "original": "assets/bg-river-surface-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-river-surface.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-river",
+      "file": "assets/bg-river.webp",
+      "original": "assets/bg-river-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-river.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-stone",
+      "file": "assets/bg-stone.webp",
+      "original": "assets/bg-stone-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-stone.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-teashop-whisper",
+      "file": "assets/bg-teashop-whisper.webp",
+      "original": "assets/bg-teashop-whisper-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-teashop-whisper.txt",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-tent",
+      "file": "assets/bg-tent.webp",
+      "original": "assets/bg-tent-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-tent.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-tomb-phoenix-broken",
+      "file": "assets/bg-tomb-phoenix-broken.webp",
+      "original": "assets/bg-tomb-phoenix-broken-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-tomb-phoenix-broken.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-tomb-phoenix",
+      "file": "assets/bg-tomb-phoenix.webp",
+      "original": "assets/bg-tomb-phoenix-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-tomb-phoenix.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-tower",
+      "file": "assets/bg-tower.webp",
+      "original": "assets/bg-tower-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-tower.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-wine-table",
+      "file": "assets/bg-wine-table.webp",
+      "original": "assets/bg-wine-table-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-wine-table.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "bg-yuewu",
+      "file": "assets/bg-yuewu.webp",
+      "original": "assets/bg-yuewu-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/bg-yuewu.txt",
+      "size": [
+        1672,
+        941
+      ],
+      "alpha": false,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "censer-body",
+      "file": "assets/censer-body.webp",
+      "original": "assets/censer-body-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/censer-body.txt",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "censer-lid",
+      "file": "assets/censer-lid.webp",
+      "original": "assets/censer-lid-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/censer-lid.txt",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-ajie",
+      "file": "assets/char-ajie.webp",
+      "original": "assets/char-ajie-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-ajie.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-ajin",
+      "file": "assets/char-ajin.webp",
+      "original": "assets/char-ajin-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-ajin.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-bangu",
+      "file": "assets/char-bangu.webp",
+      "original": "assets/char-bangu-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-bangu.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-driver",
+      "file": "assets/char-driver.webp",
+      "original": "assets/char-driver-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-driver.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-fenggun-back",
+      "file": "assets/char-fenggun-back.webp",
+      "original": "assets/char-fenggun-back-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-fenggun-back.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-fenggun",
+      "file": "assets/char-fenggun.webp",
+      "original": "assets/char-fenggun-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-fenggun.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-fenghuan-dead",
+      "file": "assets/char-fenghuan-dead.webp",
+      "original": "assets/char-fenghuan-dead-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-fenghuan-dead.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-fenghuan",
+      "file": "assets/char-fenghuan.webp",
+      "original": "assets/char-fenghuan-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-fenghuan.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-fenghuanqi",
+      "file": "assets/char-fenghuanqi.webp",
+      "original": "assets/char-fenghuanqi-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-fenghuanqi.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-guide",
+      "file": "assets/char-guide.webp",
+      "original": "assets/char-guide-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-guide.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-pangfen",
+      "file": "assets/char-pangfen.webp",
+      "original": "assets/char-pangfen-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-pangfen.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-shuli",
+      "file": "assets/char-shuli.webp",
+      "original": "assets/char-shuli-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-shuli.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "char-yaoguang",
+      "file": "assets/char-yaoguang.webp",
+      "original": "assets/char-yaoguang-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/char-yaoguang.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "item-river-lantern",
+      "file": "assets/item-river-lantern.webp",
+      "original": "assets/item-river-lantern-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/item-river-lantern.txt",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "item-winepot",
+      "file": "assets/item-winepot.webp",
+      "original": "assets/item-winepot-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/item-winepot.txt",
+      "size": [
+        1312,
+        1199
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "item-yuchan",
+      "file": "assets/item-yuchan.webp",
+      "original": "assets/item-yuchan-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/item-yuchan.txt",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "item-zhujian",
+      "file": "assets/item-zhujian.webp",
+      "original": "assets/item-zhujian-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/item-zhujian.txt",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "stranger-front",
+      "file": "assets/stranger-front.webp",
+      "original": "assets/stranger-front-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/stranger-front.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "key": "torch-lit",
+      "file": "assets/torch-lit.webp",
+      "original": "assets/torch-lit-source.png",
+      "method": "Built-in image_gen",
+      "prompt": "art-prompts/torch-lit.txt",
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": true,
+      "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+    },
+    {
+      "file": "assets/name-card.svg",
+      "method": "Original code-native SVG interface ornament",
+      "source": "tools/finalize_art.cjs"
+    },
+    {
+      "file": "assets/book-paper.svg",
+      "method": "Original code-native SVG interface ornament",
+      "source": "tools/finalize_art.cjs"
+    }
+  ]
+}

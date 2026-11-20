@@ -1,0 +1,13 @@
+{
+  "key": "item-winepot",
+  "file": "assets/item-winepot.webp",
+  "original": "assets/item-winepot-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/item-winepot.txt",
+  "size": [
+    1312,
+    1199
+  ],
+  "alpha": true,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

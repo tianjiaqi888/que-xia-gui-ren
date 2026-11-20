@@ -1,0 +1,13 @@
+{
+  "key": "censer-lid",
+  "file": "assets/censer-lid.webp",
+  "original": "assets/censer-lid-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/censer-lid.txt",
+  "size": [
+    1254,
+    1254
+  ],
+  "alpha": true,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

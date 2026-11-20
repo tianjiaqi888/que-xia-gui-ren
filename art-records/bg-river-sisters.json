@@ -1,0 +1,13 @@
+{
+  "key": "bg-river-sisters",
+  "file": "assets/bg-river-sisters.webp",
+  "original": "assets/bg-river-sisters-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/bg-river-sisters.txt",
+  "size": [
+    1672,
+    941
+  ],
+  "alpha": false,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

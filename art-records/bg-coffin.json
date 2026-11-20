@@ -1,0 +1,13 @@
+{
+  "key": "bg-coffin",
+  "file": "assets/bg-coffin.webp",
+  "original": "assets/bg-coffin-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/bg-coffin.txt",
+  "size": [
+    1672,
+    941
+  ],
+  "alpha": false,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

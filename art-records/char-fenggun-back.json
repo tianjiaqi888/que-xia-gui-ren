@@ -1,0 +1,13 @@
+{
+  "key": "char-fenggun-back",
+  "file": "assets/char-fenggun-back.webp",
+  "original": "assets/char-fenggun-back-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/char-fenggun-back.txt",
+  "size": [
+    1024,
+    1536
+  ],
+  "alpha": true,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

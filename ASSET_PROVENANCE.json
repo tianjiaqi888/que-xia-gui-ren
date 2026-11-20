@@ -1,0 +1,147 @@
+{
+  "project": "阙下归人 独立开发版",
+  "sourceCode": {
+    "url": "https://github.com/1926547192/1926547192.github.io",
+    "authorization": "User states their friend permits reuse. No remote repository modified.",
+    "license": "Not selected; preserve attribution and confirm with author before release."
+  },
+  "assets": [
+    {
+      "file": "assets/street.webp",
+      "source": "assets/street-source.png",
+      "method": "Built-in image_gen",
+      "purpose": "Modern imagined street, not a documented real location",
+      "prompt": "Use case: stylized-concept. Asset type: widescreen 16:9 background ONLY for a premium Chinese narrative 2D adventure game. Present-day small Sichuan county town street at an overcast early morning, quiet damp asphalt and old stone pavement, plaster walls and weathered timber shopfronts, a little recessed closed shop doorway on LEFT to hold a separately composited elderly match seller, a worn wooden low stool on left and a tiny folded cloth on ground beside it, no merchandise. Road leads towards misty distance on RIGHT, gently curving roofs, overhead wires, restrained lived-in modern details including a distant utility pole and indistinct parked bicycle. Unmistakably contemporary ordinary county street, not a fantasy ancient city. No people. Painterly realistic cinematic game concept art, delicate brush texture, muted moss gray, charcoal teal, faded umber, warm cream highlights, atmospheric perspective. Main open foreground left 15-45 percent reserved for a full-body character sprite, lower 20 percent quiet for dialogue. Broad soft morning light from upper right, readable exposure, quiet mysterious undertone but humane and calm. Camera at human eye height, believable depth. No readable text, no invented Chinese glyphs, no logos, no UI, no watermark. Match material quality of a hand-painted cinematic stone tomb environment. Full bleed landscape."
+    },
+    {
+      "file": "assets/oldlady.webp",
+      "source": "assets/oldlady-source.png",
+      "method": "Built-in image_gen; transparent",
+      "purpose": "Fictional character",
+      "prompt": "Asset type: isolated full-body character sprite for a cinematic painterly realistic 2D Chinese adventure game. An elderly Chinese woman around 80, thin and stooped, deeply lined kind but weary face, gray hair in a loose low bun, faded charcoal-indigo padded cotton jacket with patched elbows and brown-gray loose trousers, worn plain black cloth shoes. Present-day rural Sichuan clothing, not Han dynasty costume. Standing, slight three-quarter turn facing camera right, gently holding out one SMALL unbranded matchbox in one hand at waist level towards viewer, other hand gathers her sleeve. Respectful human portrait, not caricature, not grotesque or ghostly. Entire body including both shoes, no crop. Realistic anatomy and hands, restrained painterly illustration texture, desaturated teal gray and umber palette, soft overcast early morning light from upper right. Designed to composite on a wet old county-town street. Genuinely transparent background, no environment, no stool, no typography, no watermark, no backdrop or halo. A single woman only, generous transparent margin around silhouette."
+    },
+    {
+      "file": "assets/matchbox.webp",
+      "source": "assets/matchbox-source.png",
+      "method": "Built-in image_gen; transparent",
+      "purpose": "Unbranded fictional prop",
+      "prompt": "Asset type: isolated inventory prop sprite for a realistic painterly Chinese 2D narrative adventure. One small plain vintage cardboard matchbox, faded unbranded kraft paper sleeve, dark umber striker on long side, inner tray slid halfway open showing tidy wooden matches with muted red-brown heads; one loose unlit match resting diagonally beside the box. No logos, no lettering, no symbols. Entire object visible in three-quarter slightly overhead view, soft diffuse light from upper right. Earthy muted brown tan charcoal palette, convincing worn cardboard grain and hand-painted illustration detail, match a cinematic realistic painterly old Chinese county-street game. Genuinely transparent background around the whole object; no tabletop, no scenery, no hands, no black rectangle or colored backdrop, no drop shadow plate. Centered compact composition with margins, premium game item illustration."
+    },
+    {
+      "file": "assets/tomb.webp",
+      "source": "assets/tomb-source.png",
+      "method": "Built-in image_gen",
+      "purpose": "Imagined tomb; not an archaeological reconstruction",
+      "prompt": "Use case: historical-scene. Asset type: wide 16:9 background painting for a Chinese atmospheric 2D point-and-click narrative game, no UI or lettering. Create a premium hand-painted cinematic Eastern Han brick-and-stone burial chamber, subdued charcoal teal, dusty sepia and antique gold, textured brushwork and believable architectural depth, mysterious contemplative atmosphere, not horror gore. View from inside the entrance towards a central distant stone doorway. Left wall has a large weathered carved stone relief panel with abstract eroded strokes (no readable invented text). Right back chamber contains a low closed rectangular stone coffin. Lower right and lower left floor have clear uncluttered areas for independent interactable pottery and foreground props. Architectural frame silhouettes near top corners. Soft cool light descends through narrow ceiling crack, faint warm reflected light on stone surfaces, dust atmosphere, readable middle exposure (do not make black). No people, no fire, no pottery in the foreground, no modern objects, no skulls, no text, no watermark. Sophisticated painterly realistic game environment, panoramic widescreen framing, leave lower 20 percent visually quiet for dialogue overlay. This is an imaginative game setting, not an archaeological reconstruction."
+    },
+    {
+      "file": "assets/music/memories-of-stone.mp3",
+      "title": "Memories Of Stone",
+      "author": "Scott Buckley",
+      "source": "https://www.scottbuckley.com.au/library/memories-of-stone/",
+      "download": "https://scottbuckley.com.au/library/wp-content/uploads/2026/02/MemoriesOfStone.mp3",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "method": "Author-published music; downloaded from the official website",
+      "changes": "Two-pass loudness adjustment toward -18 LUFS, -1.5 dBTP; stereo MP3 128kbps/44.1kHz. Runtime excerpts, looping and crossfades.",
+      "sha256": "2b0074830cb08fdf0b338eb86b0750c9f3f5eee4a2ae58d4b873b0d8e275c701"
+    },
+    {
+      "file": "assets/music/darkest-child.mp3",
+      "title": "Darkest Child",
+      "author": "Kevin MacLeod",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100783",
+      "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Darkest%20Child.mp3",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "method": "Author-published music; downloaded from the official website",
+      "changes": "Two-pass loudness adjustment toward -18 LUFS, -1.5 dBTP; stereo MP3 128kbps/44.1kHz. Runtime excerpts, looping and crossfades.",
+      "sha256": "c8c8e2e4c28221c747197126fbdcec8ba024ab0d0c41bbb6a3bc8edfd41f0c20"
+    },
+    {
+      "file": "assets/music/legionnaire.mp3",
+      "title": "Legionnaire (Original)",
+      "author": "Scott Buckley",
+      "source": "https://www.scottbuckley.com.au/library/legionnaire/",
+      "download": "https://www.scottbuckley.com.au/wp-content/audio/sb_legionnaire.mp3",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "method": "Author-published music; downloaded from the official website",
+      "changes": "Two-pass loudness adjustment toward -18 LUFS, -1.5 dBTP; stereo MP3 128kbps/44.1kHz. Runtime excerpts, looping and crossfades.",
+      "sha256": "3b3256de1b849c6752f3cae1172fc9d90d6eb246db930847f2a462e71795495a"
+    },
+    {
+      "file": "assets/music/eastern-thought.mp3",
+      "title": "Eastern Thought",
+      "author": "Kevin MacLeod",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100682",
+      "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Eastern%20Thought.mp3",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "method": "Author-published music; downloaded from the official website",
+      "changes": "Two-pass loudness adjustment toward -18 LUFS, -1.5 dBTP; stereo MP3 128kbps/44.1kHz. Runtime excerpts, looping and crossfades.",
+      "sha256": "767f2929f53686b828defae012a9ab0bec3182d3b154387692113dc314cb2ccd"
+    },
+    {
+      "file": "assets/music/ishikari-lore.mp3",
+      "title": "Ishikari Lore",
+      "author": "Kevin MacLeod",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100192",
+      "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Ishikari%20Lore.mp3",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "method": "Author-published music; downloaded from the official website",
+      "changes": "Two-pass loudness adjustment toward -18 LUFS, -1.5 dBTP; stereo MP3 128kbps/44.1kHz. Runtime excerpts, looping and crossfades.",
+      "sha256": "1bededafb9b91c4d875ae9dbc7e2caaf34290885fc7097164e36f0b8f86fcfa8"
+    },
+    {
+      "file": "assets/music/undertow.mp3",
+      "title": "Undertow",
+      "author": "Scott Buckley",
+      "source": "https://www.scottbuckley.com.au/library/undertow/",
+      "download": "https://scottbuckley.com.au/library/wp-content/uploads/2019/12/sb_undertow.mp3",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "method": "Author-published music; downloaded from the official website",
+      "changes": "Two-pass loudness adjustment toward -18 LUFS, -1.5 dBTP; stereo MP3 128kbps/44.1kHz. Runtime excerpts, looping and crossfades.",
+      "sha256": "7ca4605bbc36abf040d7f79f410e927f4a480af8b4b1ccdb248e3604b009d5e3"
+    },
+    {
+      "file": "assets/music/in-this-moment.mp3",
+      "title": "In This Moment",
+      "author": "Scott Buckley",
+      "source": "https://www.scottbuckley.com.au/library/in-this-moment/",
+      "download": "https://scottbuckley.com.au/library/wp-content/uploads/2026/08/InThisMoment.mp3",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "method": "Author-published music; downloaded from the official website",
+      "changes": "Two-pass loudness adjustment toward -18 LUFS, -1.5 dBTP; stereo MP3 128kbps/44.1kHz. Runtime excerpts, looping and crossfades.",
+      "sha256": "e6a9017bee6027eccbf94780c247bfeb8dcb6ba8e36626d1622144d073272338"
+    },
+    {
+      "file": "assets/music/ascension.mp3",
+      "title": "Ascension",
+      "author": "Scott Buckley",
+      "source": "https://www.scottbuckley.com.au/library/ascension/",
+      "download": "https://scottbuckley.com.au/library/wp-content/uploads/2019/02/sb_ascension.mp3",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "method": "Author-published music; downloaded from the official website",
+      "changes": "Two-pass loudness adjustment toward -18 LUFS, -1.5 dBTP; stereo MP3 128kbps/44.1kHz. Runtime excerpts, looping and crossfades.",
+      "sha256": "b4a6de544086aaaee4715eedcb392965b90face14e38847106b9dee3d58519e9"
+    },
+    {
+      "file": "assets/music/reawakening.mp3",
+      "title": "Reawakening",
+      "author": "Scott Buckley",
+      "source": "https://www.scottbuckley.com.au/library/reawakening/",
+      "download": "https://scottbuckley.com.au/library/wp-content/uploads/2023/05/Reawakening.mp3",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "method": "Author-published music; downloaded from the official website",
+      "changes": "Two-pass loudness adjustment toward -18 LUFS, -1.5 dBTP; stereo MP3 128kbps/44.1kHz. Runtime excerpts, looping and crossfades.",
+      "sha256": "f415b5067595cde19e6be2e5c0ecd66762229c000efa0507495c7df632a08104"
+    }
+  ],
+  "musicAttribution": "Music by Scott Buckley (www.scottbuckley.com.au) and Kevin MacLeod (incompetech.com), released under CC BY 4.0. Individual titles and source links appear in the in-game audio settings and ending credits. Music retains its own license independently of source code."
+}

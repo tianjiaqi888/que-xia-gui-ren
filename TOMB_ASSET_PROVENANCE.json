@@ -1,0 +1,22 @@
+{
+  "scene": "序幕 墓室初醒",
+  "reuse": "Approved earlier sample; no new image generation for this scene",
+  "assets": [
+    {
+      "file": "assets/tomb.webp",
+      "source": "assets/tomb-source.png",
+      "original": "../sample/assets/tomb.png",
+      "method": "Built-in image_gen; reused",
+      "purpose": "Imagined game tomb, not archaeological reconstruction"
+    },
+    {
+      "file": "assets/pottery.webp",
+      "source": "assets/pottery-source.png",
+      "original": "../sample/assets/pottery.png",
+      "method": "Built-in image_gen; reused transparent layer",
+      "prompt": "Use case: historical-scene. Asset type: single isolated game prop with genuinely transparent background. A small grouping of two dusty ancient Chinese earthenware burial jars, one upright dark brown squat round pot with short neck, one smaller broken jar leaning at its foot with a few ceramic shards. Muted clay brown charcoal palette, hand-painted realistic cinematic 2D adventure game art, worn handmade pottery texture, soft cool light from upper right and faint warm gold bounce from left, front three-quarter view slightly from above so it can stand on a stone floor. Entire silhouette visible, compact composition, no pedestal, no floor, no scenery, no lettering, no symbols, no watermark, no shadow rectangle. Not an exact archaeological replica. Transparent alpha all around."
+    }
+  ],
+  "effects": "Reuses sample's visual direction for light, dust, warmth and parallax; implemented inside complete engine in js/tomb.js and css/tomb.css",
+  "text": "Original tomb-dark / tomb-lit / tomb-observe script nodes"
+}

@@ -1,0 +1,13 @@
+{
+  "key": "char-driver",
+  "file": "assets/char-driver.webp",
+  "original": "assets/char-driver-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/char-driver.txt",
+  "size": [
+    1024,
+    1536
+  ],
+  "alpha": true,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

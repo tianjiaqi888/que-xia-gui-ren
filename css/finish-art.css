@@ -1,0 +1,14 @@
+/* Hand-built interface ornament and procedural effects, kept separate from raster scenery. */
+.procedural-art{position:relative;overflow:hidden;width:100%;height:100%;min-height:120px}
+.fx-blood{background:radial-gradient(ellipse,#7b211e77,#200c14cc)}.fx-blood i{position:absolute;top:-15%;left:24%;height:80%;width:2%;border-radius:60%;background:linear-gradient(#712722,#a94236aa,transparent);animation:art-drip 2s infinite}.fx-blood i:nth-child(2){left:56%;animation-delay:-.8s}.fx-blood i:nth-child(3){left:78%;animation-delay:-1.2s}
+.fx-ink{background:radial-gradient(ellipse,#171d1fe6 8%,#20272ab0 30%,transparent 65%)}.fx-white{background:radial-gradient(ellipse,#fffce7,#f9edd0aa 40%,transparent 75%)}
+.fx-eye{background:radial-gradient(ellipse 36% 20%,#e0d5bb 15%,#4d504a 48%,transparent 51%)}.fx-eye i:first-child{position:absolute;left:45%;top:35%;height:30%;width:10%;border-radius:50%;background:radial-gradient(circle at 35% 35%,#d6dbd6 2%,#242d29 13%,#0d1312 70%)}
+.eye-ball{width:clamp(180px,27vw,290px);height:110px;border-radius:75% 8%;transform:rotate(5deg);border:3px solid #8b7965;box-shadow:0 -10px 20px #302821aa,inset 0 7px 17px #453a3299;background:radial-gradient(ellipse at 51% 47%,#a3aaa1 0,#ebe4d2 50%,#8b7965 100%)}.eye-ball::before{top:46%;width:65px;height:65px;background:radial-gradient(circle at 33% 30%,#faf9da 0 3%,#677b75 6%,#293f3a 22%,#090f0d 48%,#556c60 65%,#9ba696 70%);box-shadow:0 0 8px #29372c55}.eye .tear{background:linear-gradient(#b7d1d044,#a9d8dfcc);box-shadow:0 0 8px #a1ccd655}.eye:focus-visible{outline:2px solid #d6bf87;outline-offset:15px}
+.asset-panel .asset-img{object-fit:contain}.asset-bg .asset-img{object-fit:cover}.redflash-note{display:none!important}
+.reading-modal #chapter-atmosphere,.reading-modal #chapter-atmosphere *,.reading-modal .procedural-art *{animation-play-state:paused!important}
+@keyframes art-drip{from{transform:translateY(-30%);opacity:0}30%{opacity:.8}to{transform:translateY(80%);opacity:0}}
+#stage[data-scene="bg-bus"] #char-layer{z-index:3}
+#bus-view[data-arrived="true"] #bus-window-surface{pointer-events:none}
+#bus-view[data-arrived="true"] #bus-fog,#bus-view[data-arrived="true"] #bus-rain{display:none}
+#bus-view[data-arrived="true"] #bus-frame{filter:saturate(.8) brightness(.95)}
+@media(prefers-reduced-motion:reduce){.procedural-art *{animation:none!important}}

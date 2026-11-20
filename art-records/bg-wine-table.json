@@ -1,0 +1,13 @@
+{
+  "key": "bg-wine-table",
+  "file": "assets/bg-wine-table.webp",
+  "original": "assets/bg-wine-table-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/bg-wine-table.txt",
+  "size": [
+    1672,
+    941
+  ],
+  "alpha": false,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

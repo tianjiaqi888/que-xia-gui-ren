@@ -1,0 +1,6 @@
+preview*.log
+*.log
+qa/
+release-audit.json
+__pycache__/
+.DS_Store

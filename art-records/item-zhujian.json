@@ -1,0 +1,13 @@
+{
+  "key": "item-zhujian",
+  "file": "assets/item-zhujian.webp",
+  "original": "assets/item-zhujian-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/item-zhujian.txt",
+  "size": [
+    1536,
+    1024
+  ],
+  "alpha": true,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

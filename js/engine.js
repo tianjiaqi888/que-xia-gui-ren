@@ -1,0 +1,867 @@
+/* ============================================================
+ * 《阙下归人》· 游戏引擎
+ * 场景切换 / 对白 / 打字机 / 光照 / 证据册 / 心神 / 转场 / 提示
+ * ============================================================ */
+
+'use strict';
+
+const PLACE_LABEL = {
+  'bg-title': '标题背景（汉阙）', 'bg-street': '背景·清晨街角', 'bg-bus': '背景·大巴车内',
+  'bg-tomb': '背景·昏暗墓室', 'bg-stone': '画像石·石刻特写', 'bg-camp': '背景·夜晚军营',
+  'bg-tent': '背景·主营帐内', 'bg-feast': '背景·庆功宴饮',
+  'bg-censer': '背景·冬日官署（铜熏炉飘香）', 'bg-fenghuan': '背景·凤鸟炉特写（手与飘烟）',
+  'bg-yuewu': '石刻·乐舞杂技画像石', 'bg-fair': '背景·汉代庙会街头',
+  'bg-river': '背景·河畔放河灯', 'bg-tower': '背景·楼阁同饮（背影·酒壶）',
+  'bg-shufang': '背景·冯焕书房', 'bg-proclaim': '背景·宣旨场景', 'bg-prison': '背景·牢狱',
+  'bg-coffin': '背景·灵堂', 'bg-funeral': '背景·百姓送行', 'bg-que-built': '背景·宕渠故里（阙已立）',
+  'bg-shuangque': '背景·苍茫双阙／阙前石门', 'bg-que-today': '背景·现实冯焕阙', 'bg-zhujian': '文物·假诏竹简',
+  'char-oldlady': '立绘·老婆婆', 'char-shadow': '立绘·失忆男子（黑影）',
+  'char-fenghuan': '立绘·冯焕（失忆男子·渐清晰）', 'char-bangu': '立绘·班固',
+  'char-shuli': '立绘·属吏（昌文）', 'char-ajin': '立绘·阿瑾', 'char-ajie': '立绘·阿瑾的姐姐',
+  'char-yaoguang': '立绘·姚光',
+  'char-fenggun': '立绘·冯绲', 'char-pangfen': '立绘·庞奋', 'char-fenghuanqi': '立绘·冯焕妻',
+  'char-servant': '立绘·下人', 'char-driver': '立绘·司机', 'char-guide': '立绘·导游',
+  'char-fenghuan-dead': '立绘·冯焕遗容',
+  'item-match': '道具·火柴', 'item-torch': '道具·火把',
+  'item-mingtie': '道具·名帖', 'item-winepot': '道具·酒壶',
+  'item-zhujian': '道具·假诏竹简', 'item-yuchan': '道具·玉蝉',
+  'fx-lunge': '特效·黑影扑屏', 'fx-war': '定格·战争场面',
+  'fx-blood': '特效·血泪喷溅', 'fx-painting': '定格·画像活化',
+  'fx-eye': '特效·流泪的眼睛', 'fx-ink': '特效·墨滴晕染', 'fx-white': '特效·双阙白光',
+  'fx-que': '场景·双阙与石门机关', 'ui-book-bg': '证据册纹样',
+};
+
+const Engine = {
+  mode: null,           // 'tour' | 'detective'
+  fast: false,
+  hp: SETTINGS.hpMax,
+  items: new Set(),
+  collected: new Set(),
+  logs: {},
+  memories: {},
+  player: { name: '游客', gender: 'f' },
+  advanceFn: null,
+  els: {},
+
+  /* ---------------- 初始化 ---------------- */
+  init() {
+    const $ = (id) => document.getElementById(id);
+    this.els = {
+      stage: $('stage'), bg: $('bg-layer'), chars: $('char-layer'),
+      light: $('light-layer'), flame: $('flame'), fx: $('fx-layer'),
+      vignette: $('vignette'), hint: $('hint'),
+      hpbar: $('hp-bar'), hpsegs: $('hp-segs'), mute: $('mute-btn'),
+      fire: $('hud-fire'), bookBtn: $('hud-book'), bookBadge: $('book-badge'),
+      dlg: $('dlg'), dlgName: $('dlg-name'), dlgText: $('dlg-text'),
+      dlgFast: $('dlg-fast'), dlgKey: $('dlg-key'),
+      card: $('interact-card'), cardTitle: $('card-title'), cardAsset: $('card-asset'),
+      cardDesc: $('card-desc'), cardBtn: $('card-btn'),
+      intertitle: $('intertitle'), itTitle: $('it-title'), itSub: $('it-sub'),
+      artifact: $('artifact-card'), artTag: $('art-tag'), artName: $('art-name'), artAsset: $('art-asset'),
+      panel: $('fx-panel'), panelText: $('panel-text'), panelAsset: $('panel-asset'),
+      toasts: $('toasts'), overlay: $('overlay'), ovCanvas: $('ov-canvas'), ovText: $('ov-text'),
+      death: $('death'), deathMsg: $('death-msg'),
+      book: $('evidence-book'), bookTabs: $('book-tabs'), bookContent: $('book-content'),
+      bookCount: $('book-count'), bookClose: $('book-close'),
+      review: $('review-modal'), reviewList: $('review-list'), reviewProgress: $('review-progress'),
+      reviewDone: $('review-done'), reviewHint: $('review-hint'),
+      doc: $('document-modal'), docTitle: $('doc-title'), docBody: $('doc-body'), docClose: $('doc-close'),
+      title: $('title-screen'), ending: $('ending'),
+      warn: $('warn-flash'),
+    };
+
+    // 心神（血条）分段
+    this.els.hpsegs.innerHTML = '';
+    for (let i = 0; i < SETTINGS.hpMax; i++) {
+      const s = document.createElement('span');
+      s.className = 'hp-seg';
+      this.els.hpsegs.appendChild(s);
+    }
+
+    // 证据册页签
+    EVIDENCE_PAGES.forEach((p) => {
+      const b = document.createElement('button');
+      b.className = 'book-tab';
+      b.textContent = p;
+      b.dataset.page = p;
+      b.addEventListener('click', () => this.switchBookTab(p));
+      this.els.bookTabs.appendChild(b);
+    });
+
+    // 证据册开关
+    this.els.bookBtn.addEventListener('click', () => { AudioFX.click(); this.openBook(); });
+    this.els.bookClose.addEventListener('click', () => { AudioFX.click(); this.closeBook(); });
+    this.els.book.addEventListener('click', (e) => { if (e.target === this.els.book) this.closeBook(); });
+
+    // 文档（名帖等）
+    this.els.docClose.addEventListener('click', () => { AudioFX.click(); this.closeDocument(); });
+    this.els.doc.addEventListener('click', (e) => { if (e.target === this.els.doc) this.closeDocument(); });
+
+    // 快进
+    this.els.dlgFast.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.fast = !this.fast;
+
+      if (this._rescheduleLine) this._rescheduleLine();
+      this.els.dlgFast.classList.toggle('on', this.fast);
+      AudioFX.click();
+    });
+
+    // 静音
+    this.els.mute.addEventListener('click', () => {
+      AudioFX.openSettings();
+    });
+    this.els.mute.textContent = AudioFX.isMuted() ? '🔇' : '🔊';
+
+    // 全局：点击推进对话
+    this.els.stage.addEventListener('pointerdown', (e) => {
+      if (this.isReadingModal() || e.target.closest('button, a, input')) return;
+      AudioFX.unlock();
+      if (this.advanceFn) { this.advanceFn(); }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.code === 'Space' || e.code === 'Enter') && !this.isReadingModal() && !/INPUT|TEXTAREA|BUTTON|A/.test(document.activeElement.tagName)) {
+        e.preventDefault();
+        if (this.advanceFn) { this.advanceFn(); }
+      }
+      if (e.code === 'Escape') {
+        if (this.els.book.classList.contains('show')) this.closeBook();
+        if (this.els.doc.classList.contains('show')) this.closeDocument();
+      }
+    });
+
+    this.updateHp();
+    this.setLight(null);
+  },
+
+  /* ---------------- 流程控制 ---------------- */
+  start(mode, from = 0, restored = null) {
+    this.clearDeath();
+    if (typeof StoryHistory !== 'undefined') StoryHistory.begin(restored);
+    this._resumePhase = restored?.phase || '';
+    this._resumeDialogue = !!restored?.spoken && !restored?.phase;
+    this.mode = mode;
+    this.fast = false;
+    this.hp = SETTINGS.hpMax;
+    this.items = new Set();
+    this.collected = new Set();
+    this.logs = {};
+    this.memories = {};
+    this._resumeLine = restored ? restored.line : 0;
+    if (restored) Progress.restore(restored);
+    else if (typeof Progress !== 'undefined') Progress.begin(from);
+    this.els.dlgFast.classList.toggle('on', false);
+    this.els.hpbar.classList.toggle('hidden', mode !== 'detective');
+    this.els.title.classList.remove('show');
+    this.els.ending.classList.remove('show');
+    this.hideDlg();
+    this.updateHp();
+    this.updateHud();
+    this.run(SCRIPT, from);
+  },
+
+  async run(script, from) {
+    this._cancelled = false;
+    for (let i = from; i < script.length; i++) {
+      if (this._cancelled) return;
+      const node = script[i];
+      this.currentIndex = i;
+      this._nodePhase = this._resumePhase || ''; this._resumePhase = '';
+      if (typeof StoryHistory !== 'undefined') StoryHistory.enter(i);
+      if (typeof Progress !== 'undefined') Progress.enter(i);
+      if (this._nodePhase && typeof StoryHistory !== 'undefined') { this.currentNode = Chapters.cleanNode(node); await StoryHistory.playPhase(this._nodePhase); }
+      else await this.runNode(node, i);
+      this._resumeLine = 0;this._resumeDialogue=false;
+    }
+  },
+
+  async runNode(node) {
+    this.currentNode = node;
+    window.dispatchEvent(new CustomEvent("game-node", { detail: node }));
+    switch (node.type) {
+      case 'intertitle': await this.nodeIntertitle(node); break;
+      case 'scene':      await this.nodeScene(node); break;
+      case 'interact':   await this.nodeCard(node, '交互'); break;
+      case 'item':       await this.nodeCard(node, '获得'); break;
+      case 'book':       await this.nodeBook(node); break;
+      case 'transition': await this.nodeTransition(node); break;
+      case 'artifact':   await this.nodeArtifact(node); break;
+      case 'minigame':
+      case 'observe':
+      case 'scare':
+      case 'listen':
+      case 'review':
+      case 'blood':
+      case 'document':
+      case 'redflash':
+      case 'writing':
+      case 'inkdrop':
+      case 'coffinview':
+      case 'jade':
+      case 'eye':
+      case 'evidence-overview':
+      case 'inscription':
+      case 'credits':
+      case 'spot':     await Minigames.run(node); break;
+      case 'hint':     this.hint(node.text); break;
+      case 'ending':   await this.nodeEnding(); break;
+      default: break;
+    }
+  },
+
+  /* ---------------- 节点实现 ---------------- */
+  nodeIntertitle(node) {
+    return new Promise((resolve) => {
+      this.hint(node.hint);
+      this.hideDlg();
+      this.els.itTitle.textContent = node.title;
+      this.els.itSub.textContent = node.sub || '';
+      this.els.intertitle.classList.add('show');
+      AudioFX.gong();
+      if (typeof AudioFX.chapterMusic === 'function') AudioFX.chapterMusic(node.title);
+      let settled = false;
+      const done = () => {
+        if (this.isReadingModal()) return;
+        if (settled) return; settled = true;
+        document.removeEventListener('pointerdown', done);
+        this.els.intertitle.classList.remove('show');
+        resolve();
+      };
+      document.addEventListener('pointerdown', done);
+      TombScene.wait(2400).then(done);
+    });
+  },
+
+  nodeScene(node) {
+    if (node.id === 'bus') return BusScene.play(node);
+    if (node.id === 'tomb-dark') TombScene.reset();
+    this.setBg(node.bg || null);
+    if (node.id === 'epi-bus') BusScene.arrive();
+    this.setChars(node.chars || []);
+    this.setLight(node.id === 'tomb-dark' ? null : (node.light || (node.dark ? 'match' : null)));
+    this.hint(node.hint);
+    const ctx = { log: node.log || null, chars: node.chars || [], checkpoint: true };
+    return this.showLines(node.lines, ctx).then(() => {
+      if (node.id !== 'street' && node.id !== 'meet') this.setChars([]);
+      if (!node.light) this.setLight(null);
+    });
+  },
+
+  nodeCard(node, kind) {
+    return new Promise((resolve) => {
+      this.hint(node.hint);
+      this.hideDlg();
+      this.els.cardTitle.textContent = (kind === '获得' && !node.title.startsWith('获得') ? '获得 · ' : '') + node.title;
+      this.els.cardDesc.textContent = node.desc;
+      this.els.cardBtn.textContent = node.button;
+      this.els.cardAsset.innerHTML = '';
+      this.els.cardAsset.appendChild(buildAsset(node.asset || null, 'item'));
+      this.els.card.classList.add('show');
+      AudioFX.whoosh();
+      this.els.card.dataset.asset = node.asset || "";
+      this.els.cardBtn.disabled = false;
+      const handler = async () => {
+        this.els.cardBtn.disabled = true;
+        if (node.id === "buy-match") await StreetScene.receiveMatch();
+        if (node.id === 'torch') await EncounterScene.igniteTorch();
+        this.els.cardBtn.removeEventListener('click', handler);
+        this.els.card.classList.remove('show');
+        AudioFX.collect();
+        (node.items || []).forEach((it) => this.addItem(it));
+        if (node.toast) this.toast(node.toast, 'good');
+        if (node.asset === 'item-torch') { AudioFX.torch(); this.setLight('torch'); }
+        if (node.asset === 'item-match') { AudioFX.flame(); }
+        if (node.id === 'buy-match') {
+          this.setChars([]);
+          if (StreetScene.reviewMode) await StreetScene.reviewCheckpoint();
+        }
+        resolve();
+      };
+      this.els.cardBtn.addEventListener('click', handler);
+    });
+  },
+
+  nodeBook(node) {
+    return this.showLines(node.lines, { log: null, chars: [] }).then(() => new Promise((resolve) => {
+      this.hint('点击右下角「证据册」查看（或按 Esc 关闭）');
+      this.els.bookBtn.classList.add('pulse');
+      AudioFX.whoosh();
+      const t = setTimeout(() => { this.els.bookBtn.classList.remove('pulse'); this.openBook(); }, 1300);
+      this._onBookCloseOnce = () => { clearTimeout(t); this.els.bookBtn.classList.remove('pulse'); resolve(); };
+    }));
+  },
+
+  nodeTransition(node) {
+    const isFlash = node.effect === 'flash';
+    const dur = node.dur || (node.effect === 'static' ? SETTINGS.staticDur
+      : (isFlash ? 3400 : SETTINGS.transitionDur));
+    return new Promise((resolve) => {
+      this.hideDlg();
+      this.setChars([]);
+      this.hidePanel();
+      let swapped=false;
+      const swapScene=()=>{if(!swapped&&isFlash){swapped=true;this.setBg(node.asset||'bg-feast');}};
+      this.els.overlay.style.opacity='';
+      this.els.overlay.classList.add('show');
+      this.els.ovText.textContent = node.text || '';
+      this.els.ovText.classList.toggle('show', !!node.text);
+
+      if (node.effect === 'static') {
+        // 电视雪花：canvas 噪点
+        this.els.overlay.style.background = 'transparent';
+        this.els.ovCanvas.classList.add('show');
+        this._staticOn = true;
+        AudioFX.whoosh();
+        const draw = () => {
+          if (!this._staticOn) return;
+          const c = this.els.ovCanvas, g = c.getContext('2d');
+          const w = c.width = c.clientWidth || window.innerWidth;
+          const h = c.height = c.clientHeight || window.innerHeight;
+          const img = g.createImageData(w, h);
+          const d = img.data;
+          for (let i = 0; i < d.length; i += 4) {
+            const v = (Math.random() * 255) | 0;
+            d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255;
+          }
+          g.putImageData(img, 0, 0);
+          if (this._staticOn) requestAnimationFrame(draw);
+        };
+        draw();
+      } else if (isFlash) {
+        // Change the scene behind a brief light fade; never mount a second image panel.
+        this.els.overlay.style.background = '#e5dfcf';
+        AudioFX.success();
+        TombScene.wait(500).then(() => {
+          if (settled) return;
+          swapScene();
+          this.els.overlay.style.transition='opacity 380ms ease';
+          this.els.overlay.style.opacity='0';
+        });
+      } else {
+        this.els.overlay.style.background = '#05070a';
+      }
+
+      let settled = false;
+      const finish = () => {
+        if (this.isReadingModal()) return;
+        if (settled) return; settled = true;
+        swapScene();
+        this._staticOn = false;
+        this.els.ovCanvas.classList.remove('show');
+        this.els.ovText.classList.remove('show');
+        this.els.overlay.style.background = '#05070a';
+        this.els.overlay.style.opacity='';
+        this.els.overlay.style.transition='';
+        this.els.overlay.classList.remove('show');
+        this.hidePanel();
+        document.removeEventListener('pointerdown', finish);
+        resolve();
+      };
+      // 点击可跳过（有最短时长）
+      document.addEventListener('pointerdown', finish);
+      TombScene.wait(dur).then(finish);
+    });
+  },
+
+  showPanel(assetKey, text) {
+    this.els.panelText.textContent = text;
+    this.els.panelAsset.innerHTML = '';
+    this.els.panelAsset.appendChild(buildAsset(assetKey, 'panel'));
+    this.els.panel.classList.add('show');
+  },
+
+  hidePanel() {
+    this.els.panel.classList.remove('show');
+    this.els.panelAsset.replaceChildren();
+    this.els.panelText.textContent='';
+  },
+
+  nodeArtifact(node) {
+    return new Promise((resolve) => {
+      this.hideDlg();
+      this.els.artTag.textContent = (node.title || '文物线索').replace('文物原型','文物线索') + ' · 意象插画';
+      this.els.artName.textContent = node.name;
+      this.els.artAsset.innerHTML = '';
+      this.els.artAsset.appendChild(buildAsset(node.asset, 'panel'));
+      this.els.artifact.classList.add('show');
+      AudioFX.gong();
+      let settled = false;
+      const done = () => {
+        if (this.isReadingModal()) return;
+        if (settled) return; settled = true;
+        document.removeEventListener('pointerdown', done);
+        this.els.artifact.classList.remove('show');
+        resolve();
+      };
+      document.addEventListener('pointerdown', done);
+      TombScene.wait(2600).then(done);
+    });
+  },
+
+  nodeEnding() {
+    return new Promise((resolve) => {
+      this.hideDlg();
+      this.setChars([]);
+      this.setLight(null);
+
+      this.els.ending.classList.add('show');
+      AudioFX.gong();
+      const r = this.buildEnding();
+      resolve(r);
+    });
+  },
+
+  buildEnding() {
+    const el = this.els.ending;
+    const mapBox = el.querySelector('#ending-map');
+    mapBox.innerHTML = '';
+    const MAP = (typeof ENDING_MAP !== 'undefined') ? ENDING_MAP : [];
+    MAP.forEach((m) => {
+      const card = document.createElement('button');
+      card.className = 'map-card' + (m.lit ? ' lit' : '');
+      card.innerHTML = `<span class="map-icon">${m.lit ? '🏮' : '🗿'}</span><span class="map-name">${m.name}</span>` +
+        (m.lit ? '<span class="map-tag">已点亮</span>' : '<span class="map-tag">未点亮</span>');
+      card.addEventListener('click', () => {
+        AudioFX.click();
+        if (m.lit) { this.toast('冯焕阙的故事，你已走过。', 'info'); return; }
+        this.toast(m.note, 'info');
+      });
+      mapBox.appendChild(card);
+    });
+    return el;
+  },
+
+  /* ---------------- 对白 ---------------- */
+  showLines(lines, ctx) {
+    const self = this;
+    return (async () => {
+      this.els.dlg.classList.add('show');
+      const start = ctx.checkpoint ? (this._resumeLine || 0) : 0;
+      this._resumeLine = 0;
+      for (let i = start; i < lines.length; i++) {
+        if (ctx.checkpoint && typeof Progress !== 'undefined') Progress.line(i);
+        await this.renderLine(lines[i], ctx, 0, { lineIndex: i });
+      }
+      this.hideDlg();
+    })();
+  },
+
+  hideDlg() {
+    this.els.dlg.classList.remove('show');
+    this.advanceFn = null;
+
+  },
+
+  renderLine(ln, ctx, autoMs, meta) {
+    this._audioLineNode = this.currentNode;
+    this._audioLineIndex = meta?.lineIndex || 0;
+    if (typeof AudioFX !== 'undefined' && AudioFX.refresh) AudioFX.refresh();
+    const self = this;
+    return new Promise((resolve) => {
+      const dlg = this.els.dlg;
+      dlg.classList.add('show');
+      dlg.classList.remove('key-glow');
+
+      // 说话人
+      let nameText = '';
+      let cls = '';
+      if (ln.cls === 'narration') { nameText = ln.name || '旁白'; cls = 'narration'; this.els.dlgName.style.color = '#9a938a'; }
+      else if (ln.cls === 'thought') { nameText = ln.name || '内心想法'; cls = 'thought'; this.els.dlgName.style.color = '#8fa0bf'; }
+      else if (ln.cls === 'action') { nameText = ln.name || '『』'; cls = 'action'; this.els.dlgName.style.color = '#8c8372'; }
+      else {
+        nameText = ln.label || (ln.speaker === 'tourist' ? (this.player.name || '游客') : (CHAR_DEFS[ln.speaker] ? CHAR_DEFS[ln.speaker].name : ln.speaker));
+        this.els.dlgName.style.color = CHAR_DEFS[ln.speaker] ? CHAR_DEFS[ln.speaker].color : '#e8dfc8';
+      }
+      this.els.dlgName.textContent = nameText;
+      dlg.dataset.cls = cls;
+
+      // 老婆婆称呼按性别替换
+      let text = ln.text;
+      if (ln.speaker === 'oldlady' || ln.speaker === 'driver') {
+        text = text.replace('小姑娘/小伙子', this.player.gender === 'f' ? '小姑娘' : '小伙子');
+      }
+
+      // 说话人立绘高亮 / 姿态
+      const chars = ctx.chars || [];
+      chars.forEach((c) => {
+        const el = document.getElementById('char-' + c.id);
+        if (el) {
+          el.classList.toggle('speaking', c.id === ln.speaker);
+          el.classList.remove('pose-angry', 'pose-think');
+          if (c.id === ln.speaker && ln.pose) el.classList.add('pose-' + ln.pose);
+        }
+      });
+
+      // 关键证据发光（仅游览模式）
+      const isKey = !!(ln.evidence && ln.evidence.length);
+      const showGlow = isKey && this.mode === 'tour' && !ln.evidence.every((id) => this.collected.has(id));
+      this.els.dlgKey.classList.toggle('show', showGlow && !this.quietEvidence);
+      dlg.classList.toggle('key-glow', showGlow && !this.quietEvidence);
+
+      // 记录对白日志（探案模式剧情回顾用）
+      if (ctx.log && (ln.speaker || ln.cls === 'action')) {
+        (this.logs[ctx.log] = this.logs[ctx.log] || []).push({
+          speaker: ln.speaker || null,
+          name: ln.name || null,
+          cls: ln.cls || null,
+          text: text,
+          evidence: ln.evidence || null,
+        });
+      }
+
+      // 打字机
+      let settled = false;
+      let finished = false;
+      let timer = null;
+      let autoTimer = null;
+      let autoFrame = 0;
+      const textEl = this.els.dlgText;
+      const typer = typewriter(textEl, text, this.fast ? 0 : SETTINGS.typeSpeed, () => { finished = true; });
+      const finishTyping = () => { if (!finished) { finished = true; typer.finish(); } };
+      const next = () => {
+        if (settled) return;
+        if (this.isReadingModal()) { timer = setTimeout(next, 120); return; }
+        settled = true;
+        clearTimeout(timer);
+        clearTimeout(autoTimer);
+        if(autoFrame)cancelAnimationFrame(autoFrame);
+
+        finishTyping();
+        this.advanceFn = null;
+        this._rescheduleLine = null;
+        // 游览模式：离开关键句时自动收录；autoEvidence 句两种模式都自动收录（如终幕冯焕自述官职）
+        if (showGlow || ln.autoEvidence) {
+          ln.evidence.forEach((id) => this.collectEvidence(id));
+        }
+        resolve();
+      };
+
+      this.advanceFn = () => {
+        if (this.isReadingModal()) return;
+        AudioFX.unlock();
+        if (!finished) { finishTyping(); if (this.fast) schedule(); }
+        else next();
+      };
+
+      const schedule = () => {
+        clearTimeout(timer);
+        if (this.fast && !settled) timer = setTimeout(next, SETTINGS.fastDelay);
+      };
+      this._rescheduleLine = () => { if (this.fast) finishTyping(); schedule(); };
+      if (this.fast) { finishTyping(); schedule(); }
+
+      // 字幕按阅读时间推进；不启动语音、不等待朗读。
+      if (autoMs) {
+        let elapsed = 0, previous = performance.now();
+        const step = (now) => { if (settled) return; const dt = Math.min(80, now - previous); previous = now; if (!this.isReadingModal() && !document.hidden) elapsed += dt; if (elapsed >= autoMs) next(); else autoFrame = requestAnimationFrame(step); };
+        autoFrame = requestAnimationFrame(step);
+      }
+    });
+  },
+
+  /* ---------------- 证据 ---------------- */
+  collectEvidence(id) {
+    if (this.collected.has(id)) return false;
+    const def = EVIDENCE_DEFS[id];
+    if (!def) return false;
+    this.collected.add(id);
+    if (!this.quietEvidence) {
+      this.toast(`证据已收录：${def.page} · ${def.title}`, 'evidence');
+      AudioFX.collect();
+    }
+    if (typeof Progress !== 'undefined') Progress.resources();
+    this.els.bookBadge.textContent = this.collected.size;
+    if(this.quietEvidence)return true;
+    this.els.bookBadge.classList.add('bump');
+    setTimeout(() => this.els.bookBadge.classList.remove('bump'), 600);
+    this.els.bookBtn.classList.add('glow');
+    setTimeout(() => this.els.bookBtn.classList.remove('glow'), 1600);
+    return true;
+  },
+
+  hasEvidence(id) { return this.collected.has(id); },
+
+  /* ---------------- 证据册 ---------------- */
+  isReadingModal() {
+    return ['book','doc','review','death'].some(k => this.els[k]?.classList.contains('show')) || !!document.getElementById('street-review')?.open || !!document.getElementById('bus-review')?.open || !!document.getElementById('tomb-review')?.open || !!document.getElementById('encounter-review')?.open;
+  },
+
+  openBook() {
+    this.els.book.classList.add('show');
+    this.switchBookTab('籍贯');
+    this.els.bookCount.textContent = `已收录证据：${this.collected.size} 条`;
+    if (TombScene.isOpening() && TombScene.records.size) TombScene.showNotes();
+    AudioFX.click();
+    if (typeof AudioFX.refresh === 'function') AudioFX.refresh();
+  },
+  closeBook() {
+    this.els.book.classList.remove('show');
+    if (this._onBookCloseOnce) { const f = this._onBookCloseOnce; this._onBookCloseOnce = null; f(); }
+    if (typeof AudioFX.refresh === 'function') AudioFX.refresh();
+  },
+
+  /* ---------------- 文档（名帖等） ---------------- */
+  openDocument(title, lines) {
+    this.els.docTitle.textContent = title || '';
+    this.els.docBody.innerHTML = '';
+    (lines || []).forEach((t) => {
+      const p = document.createElement('p');
+      p.className = 'doc-line';
+      p.textContent = t;
+      this.els.docBody.appendChild(p);
+    });
+    this.els.doc.classList.add('show');
+    AudioFX.whoosh();
+    if (typeof AudioFX.refresh === 'function') AudioFX.refresh();
+    return new Promise((res) => { this._onDocClose = res; });
+  },
+  closeDocument() {
+    this.els.doc.classList.remove('show');
+    if (this._onDocClose) { const f = this._onDocClose; this._onDocClose = null; f(); }
+    if (typeof AudioFX.refresh === 'function') AudioFX.refresh();
+  },
+  switchBookTab(page) {
+    this.els.bookTabs.querySelectorAll('.book-tab').forEach((b) => {
+      b.classList.toggle('active', b.dataset.page === page);
+    });
+    const box = this.els.bookContent;
+    box.innerHTML = '';
+    const entries = Object.entries(EVIDENCE_DEFS).filter(([id, d]) => d.page === page && this.collected.has(id));
+    if (!entries.length) {
+      const p = document.createElement('p');
+      p.className = 'book-empty';
+      p.textContent = EVIDENCE_EMPTY[page] || '尚未收录证据。';
+      box.appendChild(p);
+      return;
+    }
+    entries.forEach(([id, d]) => {
+      const card = document.createElement('div');
+      card.className = 'book-entry';
+      card.innerHTML = `<h3>${d.title}</h3><p>${d.text}</p><span class="src">${d.source}</span>` +
+        (d.historyNote ? `<p class="note">${d.historyNote}</p>` : '');
+      box.appendChild(card);
+    });
+  },
+
+  /* ---------------- 道具 / HUD ---------------- */
+  addItem(name) {
+    this.items.add(name);
+    if (typeof Progress !== 'undefined') Progress.resources();
+    this.updateHud();
+  },
+  updateHud() {
+    const has = (n) => this.items.has(n);
+    this.els.fire.innerHTML = '';
+    if (has('火把')) {
+      const s = document.createElement('div');
+      s.className = 'fire-slot torch';
+      s.innerHTML = '<span class="fire-icon torch-icon"><img src="assets/torch-lit.webp" alt="点燃的火把"><i></i></span><span>火把</span>';
+      this.els.fire.appendChild(s);
+    } else if (has('火柴')) {
+      const s = document.createElement('div');
+      s.className = 'fire-slot match';
+      s.innerHTML = '<span class="fire-icon">🕯️</span><span>火柴</span>';
+      this.els.fire.appendChild(s);
+    } else {
+      const s = document.createElement('div');
+      s.className = 'fire-slot empty';
+      s.innerHTML = '<span class="fire-icon">⬛</span><span>无光源</span>';
+      this.els.fire.appendChild(s);
+    }
+  },
+
+  /* ---------------- 提示 / 弹窗 ---------------- */
+  hint(text) {
+    this.els.hint.textContent = text || '';
+    this.els.hint.classList.toggle('show', !!text);
+  },
+
+  toast(text, kind) {
+    const t = document.createElement('div');
+    t.className = 'toast' + (kind ? ' toast-' + kind : '');
+    t.textContent = text;
+    this.els.toasts.appendChild(t);
+    while (this.els.toasts.children.length > 3) this.els.toasts.removeChild(this.els.toasts.firstChild);
+    setTimeout(() => t.classList.add('out'), 2100);
+    setTimeout(() => t.remove(), 2600);
+  },
+
+  /* ---------------- 心神（探案模式） ---------------- */
+  damage(msg) {
+    if (this.mode !== 'detective') return;
+    this.hp = Math.max(0, this.hp - 1);
+    if (typeof Progress !== 'undefined') Progress.resources();
+    this.updateHp();
+    if (this.hp > 0) AudioFX.hurt();
+    this.els.warn.classList.add('show');
+    setTimeout(() => this.els.warn.classList.remove('show'), 450);
+    this.shakeStage();
+    if (this.hp <= 0) {
+      this.toast(msg || '心神耗尽……', 'bad');
+    }
+  },
+
+  updateHp() {
+    const segs = this.els.hpsegs.children;
+    for (let i = 0; i < segs.length; i++) {
+      segs[i].classList.toggle('on', i < this.hp);
+    }
+  },
+
+  restoreHp() { this.hp = SETTINGS.hpMax; this.updateHp(); if (typeof Progress !== 'undefined') Progress.resources(); },
+
+  clearDeath() {
+    if (this._deathFrame) cancelAnimationFrame(this._deathFrame);
+    this._deathFrame = 0;
+    this.els?.death?.classList.remove('show');
+    this.els?.stage?.classList.remove('soul-fading');
+    if (typeof AudioFX !== 'undefined' && AudioFX.death) AudioFX.death(false);
+  },
+
+  /* 独立失败演出；隐藏页面时冻结，结束后调用当前关卡的重试逻辑。 */
+  die(msg, retry) {
+    if (this.els.death.classList.contains('show')) return;
+    this.els.deathMsg.textContent = '心神耗尽';
+    const sub = this.els.death.querySelector('.death-sub');
+    if (sub) sub.textContent = msg ? msg.replace(/^心神耗尽[—…·\s]*/, '') : '意识沉入黑暗，正在回到本段……';
+    this.els.death.classList.add('show');
+    this.els.stage.classList.add('soul-fading');
+    if (AudioFX.refresh) AudioFX.refresh();
+    if (AudioFX.death) AudioFX.death(true);
+    let elapsed = 0, previous = performance.now();
+    const tick = now => {
+      const dt = Math.min(80, now - previous); previous = now;
+      if (!document.hidden) elapsed += dt;
+      if (elapsed >= 3000) { this.clearDeath(); if (retry) retry(); if (AudioFX.refresh) AudioFX.refresh(); }
+      else this._deathFrame = requestAnimationFrame(tick);
+    };
+    this._deathFrame = requestAnimationFrame(tick);
+  },
+
+  shakeStage() {
+    const s = this.els.stage;
+    s.classList.remove('shake');
+    void s.offsetWidth;
+    s.classList.add('shake');
+    setTimeout(() => s.classList.remove('shake'), 500);
+  },
+
+  /* ---------------- 场景呈现 ---------------- */
+  setBg(key) {
+    this.els.bg.innerHTML = '';
+    this.els.stage.dataset.scene = key || '';
+    TombScene.backgroundChanged(key);
+    this.hidePanel();
+    if (!key) return;
+    this.els.bg.appendChild(buildAsset(key, 'bg'));
+  },
+
+  setChars(chars) {
+    this.sceneChars = (chars || []).map(c => ({...c}));
+    this.els.chars.innerHTML = '';
+    (chars || []).forEach((c) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'char char-' + c.slot;
+      wrap.id = 'char-' + c.id;
+      const fig = buildAsset(c.asset || null, 'char');
+      wrap.appendChild(fig);
+      const name = document.createElement('div');
+      name.className = 'char-name';
+      name.textContent = c.id === 'tourist' ? (this.player.name || '游客') : (CHAR_DEFS[c.id] ? CHAR_DEFS[c.id].name : c.id);
+      wrap.appendChild(name);
+      this.els.chars.appendChild(wrap);
+    });
+  },
+
+  setLight(level) {
+    this._lightLevel = level;
+    this.els.stage.dataset.light = level || 'none';
+    const L = this.els.light;
+    if (!level) {
+      cancelAnimationFrame(this._lightRaf);
+      this._lightRaf = null;
+      L.classList.remove('show');
+      this.els.flame.classList.remove('show');
+      return;
+    }
+    L.classList.add('show');
+    this.els.flame.classList.add('show');
+    this.els.flame.classList.toggle('torch', level === 'torch');
+    const r = level === 'torch' ? SETTINGS.torchRadius : SETTINGS.matchRadius;
+    this._lightRadius = r;
+    this._lx = window.innerWidth / 2;
+    this._ly = window.innerHeight / 2;
+    L.style.setProperty('--lr', r + 'px');
+    cancelAnimationFrame(this._lightRaf);
+    this._lightLoop();
+  },
+
+  _lightLoop() {
+    if (!this._lightLevel) return;
+    if (this.isReadingModal()) { this._lightRaf = requestAnimationFrame(() => this._lightLoop()); return; }
+    const t = { x: this._tx != null ? this._tx : window.innerWidth / 2, y: this._ty != null ? this._ty : window.innerHeight / 2 };
+    this._lx += (t.x - this._lx) * 0.14;
+    this._ly += (t.y - this._ly) * 0.14;
+    this.els.light.style.setProperty('--lx', this._lx + 'px');
+    this.els.light.style.setProperty('--ly', this._ly + 'px');
+    this.els.flame.style.left = this._lx + 'px';
+    this.els.flame.style.top = (this._ly - 10) + 'px';
+    this._lightRaf = requestAnimationFrame(() => this._lightLoop());
+  },
+
+  pointerMove(x, y) { this._tx = x; this._ty = y; },
+
+  /* ---------------- 工具 ---------------- */
+  setStageShake(on) {
+    this.els.stage.classList.toggle('shake-hold', on);
+  },
+};
+
+/* ---------- 打字机 ---------- */
+function typewriter(el, text, ms, onComplete) {
+  let i = 0, stopped = false;
+  el.textContent = '';
+  const PUNCT = '，。！？…—、；：';
+  function step() {
+    if (stopped) return;
+    if (Engine.isReadingModal()) { setTimeout(step, 100); return; }
+    if (i >= text.length) { onComplete?.(); return; }
+    const ch = text[i++];
+    el.textContent += ch;
+    if (i % 4 === 0) AudioFX.typeTick();
+    if (i >= text.length) { onComplete?.(); return; }
+    const delay = PUNCT.includes(ch) ? 140 : (ms || 30);
+    setTimeout(step, delay);
+  }
+  step();
+  return { finish() { stopped = true; el.textContent = text; } };
+}
+
+/* ---------- 素材/占位构建 ---------- */
+function buildAsset(key, kind) {
+  const box = document.createElement('div');
+  box.className = 'asset asset-' + kind;
+  const def = key ? (ASSETS[key] || { src: '', note: '' }) : { src: '', note: '' };
+  const label = key ? (PLACE_LABEL[key] || key) : '素材';
+  function showPh() {
+    box.innerHTML = '';
+    box.classList.add('asset-unavailable');
+    box.setAttribute('aria-label',label+'暂时无法载入');
+  }
+  if (def.procedural) {
+    box.classList.add('procedural-art',key);
+    box.setAttribute('aria-hidden','true');
+    box.innerHTML='<i></i><i></i><i></i>';
+  } else if (!def.src) showPh();
+  if (def.src) {
+    const img = new Image();
+    img.className = 'asset-img';
+    img.alt = label;
+    img.onload = () => { box.innerHTML = ''; box.appendChild(img); };
+    img.onerror = showPh;
+    img.src = def.src;
+  }
+  return box;
+}
+

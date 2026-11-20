@@ -1,0 +1,13 @@
+{
+  "key": "bg-tower",
+  "file": "assets/bg-tower.webp",
+  "original": "assets/bg-tower-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/bg-tower.txt",
+  "size": [
+    1672,
+    941
+  ],
+  "alpha": false,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

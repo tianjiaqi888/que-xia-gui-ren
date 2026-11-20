@@ -1,0 +1,21 @@
+{
+  "scene": "序幕 大巴入梦",
+  "assets": [
+    {
+      "file": "assets/bus-landscape.webp",
+      "source": "assets/bus-landscape-source.png",
+      "method": "Built-in image_gen",
+      "purpose": "Imagined modern Sichuan countryside, not a specific documented location",
+      "prompt": "Asset type: panoramic 16:9 environment background for a premium painterly realistic Chinese 2D narrative adventure game, seen from a moving tour bus side window at overcast morning after rain. Present day Sichuan countryside around a county town: close roadside dark green bamboo and leafy shrubs at bottom, middle distance small whitewashed gray-tile village houses on rolling slopes, rice fields and layered misty low mountains in the distance. Horizontal composition with all essential village details in central 70 percent, upper half soft pale cloudy sky. Soft diffuse light, muted charcoal teal, moss green, faded warm gray and cream. Cinematic fine brush texture, coherent with realistic painterly old Sichuan county street game art. No people, no bus, no glass, no frame, no rain painted on top, no readable text or signage, no logos, no watermarks. Calm gentle sense of traveling into a dream, not fantasy, not an accurate real-world landmark. Wide seamless-feeling landscape suitable for slow horizontal parallax, no dominant object cut at frame edges."
+    },
+    {
+      "file": "assets/bus-frame.webp",
+      "source": "assets/bus-frame-source.png",
+      "method": "Built-in image_gen; transparent central window",
+      "purpose": "Fictional modern tour bus interior foreground",
+      "prompt": "Asset type: wide 16:9 TRANSPARENT WINDOW FRAME overlay for a painterly realistic 2D Chinese narrative game. First-person view sitting by the large SIDE WINDOW inside a present-day Chinese tour bus. Design as a foreground framing layer: dark blue-gray fabric seat back at the extreme LEFT covering about 12 percent of width, cream gathered bus curtain at extreme RIGHT covering about 12 percent, off-white curved interior ceiling and black window rubber across top 15 percent, dark gray window sill and armrest across bottom 20 percent, a tiny hint of seat upholstery lower left. A large single broad rounded rectangular EMPTY WINDOW fills the central area from x=14 percent to 86 percent and y=16 percent to 77 percent. That window opening MUST BE GENUINELY TRANSPARENT ALPHA, not white or black, so a separately rendered moving landscape will be visible behind it. No exterior view, no opaque glass, no people, no reflection, no rain, no text, no logos, no watermark. The whole outer perimeter is opaque interior material; ONLY THE CENTRAL WINDOW OPENING is transparent. Premium cinematic hand-painted realism, fine brush texture, muted charcoal teal and aged cream, subtle overcast morning light from window. Camera looks straight toward window, slight natural perspective in sill. No dashboard or front windshield. Full bleed horizontal 16:9 game overlay."
+    }
+  ],
+  "audio": "Procedural WebAudio via audio.js; no third-party recording",
+  "effects": "Custom CSS and canvas, js/bus.js"
+}

@@ -1,0 +1,13 @@
+{
+  "key": "char-ajin",
+  "file": "assets/char-ajin.webp",
+  "original": "assets/char-ajin-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/char-ajin.txt",
+  "size": [
+    1024,
+    1536
+  ],
+  "alpha": true,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}

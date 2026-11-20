@@ -1,0 +1,21 @@
+{
+  "scene": "序幕 器物有声",
+  "assets": [
+    {
+      "file": "assets/stranger.webp",
+      "source": "assets/stranger-source.png",
+      "method": "Built-in image_gen; transparent",
+      "purpose": "Fictional lost-memory spirit, not a historical portrait reconstruction",
+      "prompt": "Asset type: isolated full-body character sprite, genuinely transparent background, for a premium painterly realistic Chinese 2D narrative adventure. A middle-aged Chinese man about 45 to 50 wearing a worn but clean Eastern Han scholar-official robe, charcoal teal layered cross-collar robe, modest dark headcloth and topknot, slender dignified posture, hands gathered within long sleeves, facing slightly to viewer left. The character is a lost memory spirit: head and upper face partly obscured by soft charcoal mist, eyes barely perceptible, lower robe fades softly into transparent wisps. Human, solemn and confused, not demonic, no monster mouth, no glowing red eyes, no weapons, no gore. A hint of restrained kindness and ancient bearing. Realistic anatomy and historically plausible simple Han clothing, cinematic hand-painted realistic texture matching an atmospheric stone tomb adventure, muted charcoal teal and gray olive palette with very subtle warm rim light from front left. Entire silhouette visible, no crop, no ground, no cast shadow, no environment, no frame, no text, no watermark, no opaque backdrop. Transparent alpha around silhouette and mist. One figure only."
+    },
+    {
+      "file": "assets/torch.webp",
+      "source": "assets/torch-source.png",
+      "method": "Built-in image_gen; transparent unlit prop",
+      "purpose": "Imagined simple hand torch; flame rendered in code",
+      "prompt": "Asset type: one isolated ancient wooden hand torch prop sprite for a premium hand-painted realistic Chinese 2D narrative adventure. A substantial dark weathered wooden stick, upper end wrapped with frayed coarse flax cloth and cord ready to ignite, lower end simple grip. UNLIT, no flame and no smoke (fire will be animated by game code). Entire torch visible from wrapped head to bottom, long vertical composition, very slightly tilted, on a genuinely transparent background. Historically plausible simple improvised torch, no metal lantern, no elaborate fantasy ornament, no text, no logos, no watermark, no hand, no environment, no floor or opaque shadow rectangle. Cinematic painterly realism and tactile cloth/wood details, restrained charcoal umber and muted flax tan, subtle warm side light from upper left, matching a Han tomb adventure game art style. Generous transparent margin all around the isolated object."
+    }
+  ],
+  "effects": "Custom CSS approach, mist, breathing, ignition and echo rings; native engine dialogue and evidence tutorial",
+  "audio": "Existing procedural WebAudio with additional echo tones; no external audio"
+}

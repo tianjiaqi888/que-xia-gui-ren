@@ -1,0 +1,13 @@
+{
+  "key": "char-fenghuan",
+  "file": "assets/char-fenghuan.webp",
+  "original": "assets/char-fenghuan-source.png",
+  "method": "Built-in image_gen",
+  "prompt": "art-prompts/char-fenghuan.txt",
+  "size": [
+    1024,
+    1536
+  ],
+  "alpha": true,
+  "role": "Imagined game art, not archaeological reconstruction or documentary photograph"
+}
